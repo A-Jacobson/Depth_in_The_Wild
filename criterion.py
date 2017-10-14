@@ -13,16 +13,14 @@ class RelativeDepthLoss(nn.Module):
         z_B: predicted absolute depth for pixels B
         ground_truth: Relative depth between A and B (-1, 0, 1)
         """
-        mask = torch.abs(target)
-        predicted_depth = z_A - z_B
-        log_loss = torch.log(1 + torch.exp((predicted_depth * target) * -1)) * mask
-        squared_loss = (predicted_depth ** 2) * (1-mask)  # if pred depth is not zero adds to loss
-        return sum(log_loss + squared_loss)
+        pred_depth = z_A - z_B
+        log_loss = torch.mean(torch.log(1 + torch.exp(-target[target != 0] * pred_depth[target != 0])))
+        squared_loss = torch.mean(pred_depth[target == 0] ** 2)  # if pred depth is not zero adds to loss
+        return log_loss + squared_loss
 
     def forward(self, output, target):
         total_loss = 0
         for index in range(len(output)):
-            # double check index, double check data loader
             x_A = target['x_A'][index].long()
             y_A = target['y_A'][index].long()
             x_B = target['x_B'][index].long()

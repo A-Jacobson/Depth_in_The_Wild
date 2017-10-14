@@ -5,6 +5,9 @@ Pytorch implementation of Single-Image Depth Perception in the Wild https://arxi
 - [x] Architecture
 - [x] Custom Criterion
 - [x] Train on Small sample
-- [ ] Fully Train Model
+- [x] Tweak Architecture
+- [ ] Fully Train Model (100/~500 epochs)
 - [ ] Validate Results
-- [ ] Tweak Architecture
+
+Network Architecture: 
+![Network Architecture](hourglass_network.png)

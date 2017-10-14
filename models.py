@@ -95,7 +95,7 @@ class HourGlass(nn.Module):
         self.I = nn.Conv2d(64, 1, 3, padding=1)
 
     def forward(self, x):
-        # x = self.batch_norm(x) # hack to normalize input (paper didn't mention mean centering?
+        x = self.batch_norm(x) # hack to normalize input (paper didn't mention mean centering?)
         x = self.H(x)  # 128, 240, 320
         channel_1 = self.A(x)  # 64, 240, 320
 
