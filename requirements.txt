@@ -1,4 +1,4 @@
-torch==0.2.0.post4
+torch==1.13.1
 matplotlib==2.0.2
 Pillow==9.3.0
 torchvision==0.1.9
